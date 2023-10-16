@@ -21,10 +21,9 @@
 #include "gpio.h"
 #include "ltdc.h"
 
-
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <string.h>
+#include "lcd.h"
 
 /* USER CODE END Includes */
 
@@ -46,7 +45,6 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-__attribute__((section(".ram_d1"))) uint8_t fb[800 * 400];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -91,8 +89,8 @@ int main(void) {
     MX_GPIO_Init();
     MX_LTDC_Init();
     /* USER CODE BEGIN 2 */
-    HAL_LTDC_SetAddress(&hltdc, (uint32_t)fb, LTDC_LAYER_1);
-    memset((void *)fb, 0x33, 800 * 400);
+    init_display();
+    test_display();
     /* USER CODE END 2 */
 
     /* Infinite loop */
