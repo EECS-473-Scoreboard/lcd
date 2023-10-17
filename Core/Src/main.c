@@ -18,6 +18,8 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "adc.h"
+#include "dma.h"
 #include "gpio.h"
 #include "ltdc.h"
 
@@ -87,6 +89,8 @@ int main(void) {
 
     /* Initialize all configured peripherals */
     MX_GPIO_Init();
+    MX_DMA_Init();
+    MX_ADC1_Init();
     MX_LTDC_Init();
     /* USER CODE BEGIN 2 */
     init_display();
@@ -96,6 +100,8 @@ int main(void) {
     /* Infinite loop */
     /* USER CODE BEGIN WHILE */
     while (1) {
+        lv_indev_data_t touch_data;
+        read_touch(NULL, &touch_data);
         /* USER CODE END WHILE */
 
         /* USER CODE BEGIN 3 */
