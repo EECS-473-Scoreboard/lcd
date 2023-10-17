@@ -39,8 +39,6 @@ typedef struct {
 extern uint8_t fb[LCD_RENDER_WIDTH * LCD_RENDER_HEIGHT];
 extern uint32_t CLUT[256];
 
-extern ADC_ChannelConfTypeDef adc_conf;
-
 void init_display();
 void flush_cb(lv_disp_drv_t *, const lv_area_t *, lv_color_t *);
 void clean_dcache_cb(lv_disp_drv_t *);
