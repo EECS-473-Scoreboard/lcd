@@ -8,16 +8,17 @@
 #define LCD_RENDER_HEIGHT 400
 
 #define LCD_X_R_PORT GPIOF
-#define LCD_X_R_PIN GPIO_PIN_12
+#define LCD_X_R_PIN GPIO_PIN_11
 #define LCD_X_L_PORT GPIOF
-#define LCD_X_L_PIN GPIO_PIN_11
+#define LCD_X_L_PIN GPIO_PIN_12
 #define LCD_Y_D_PORT GPIOA
 #define LCD_Y_D_PIN GPIO_PIN_7
 #define LCD_Y_U_PORT GPIOC
 #define LCD_Y_U_PIN GPIO_PIN_5
 #define LCD_ADC_PORT ADC1
-#define LCD_X_R_ADC_CHAN ADC_CHANNEL_2
-#define LCD_Y_D_ADC_CHAN ADC_CHANNEL_7
+#define ADC_DMA_BUF_SIZE 2
+#define LCD_X_R_ADC_RANK 0
+#define LCD_Y_D_ADC_RANK 1
 
 typedef void lv_disp_drv_t;
 typedef struct {
