@@ -19,6 +19,12 @@
 #define ADC_DMA_BUF_SIZE 2
 #define LCD_X_R_ADC_RANK 0
 #define LCD_Y_D_ADC_RANK 1
+#define LCD_CALIB_A -0.523121
+#define LCD_CALIB_B -0.0153052
+#define LCD_CALIB_C 2171.
+#define LCD_CALIB_D -0.00558502
+#define LCD_CALIB_E -0.0103769
+#define LCD_CALIB_F 542.353
 
 typedef void lv_disp_drv_t;
 typedef struct {
@@ -45,6 +51,7 @@ void flush_cb(lv_disp_drv_t *, const lv_area_t *, lv_color_t *);
 void clean_dcache_cb(lv_disp_drv_t *);
 
 void test_display();
+void show_calib();
 
 void init_touch();
 int read_touch(lv_disp_drv_t *, lv_indev_data_t *);

@@ -95,6 +95,7 @@ int main(void) {
     /* USER CODE BEGIN 2 */
     init_display();
     test_display();
+    show_calib();
     /* USER CODE END 2 */
 
     /* Infinite loop */
@@ -102,6 +103,10 @@ int main(void) {
     while (1) {
         lv_indev_data_t touch_data;
         read_touch(NULL, &touch_data);
+        if (touch_data.state == LV_INDEV_STATE_PR) {
+            fb[touch_data.point.y * LCD_RENDER_WIDTH + touch_data.point.x] =
+                0xFE;
+        }
         /* USER CODE END WHILE */
 
         /* USER CODE BEGIN 3 */

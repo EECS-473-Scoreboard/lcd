@@ -53,6 +53,17 @@ void test_display() {
     }
 }
 
+// display three points at:
+// - 10% from left, 10% from top
+// - 10% from right, 10% from top
+// - 50% from left. 20% from bottom
+// note that screen is 800x480 but display is 800x400 from (0,0)
+void show_calib() {
+    fb[48 * LCD_RENDER_WIDTH + LCD_RENDER_WIDTH / 10] = 0xFE;
+    fb[48 * LCD_RENDER_WIDTH + LCD_RENDER_WIDTH / 10 * 9] = 0xFE;
+    fb[384 * LCD_RENDER_WIDTH + LCD_RENDER_WIDTH / 2] = 0xFE;
+}
+
 inline static void to_ground(GPIO_TypeDef *port, uint16_t pin) {
     GPIO_InitTypeDef s = {0};
     s.Pin = pin;
@@ -153,10 +164,14 @@ int read_touch(lv_disp_drv_t *_, lv_indev_data_t *data) {
     static uint16_t x = 0;
     static uint16_t y = 0;
 
-    uint16_t newX = read_x();
-    uint16_t newY = read_y();
+    uint16_t raw_x = read_x();
+    uint16_t raw_y = read_y();
 
-    if (newX == 0 && newY == 0) {
+    double newX = LCD_CALIB_A * raw_x + LCD_CALIB_B * raw_y + LCD_CALIB_C;
+    double newY = LCD_CALIB_D * raw_x + LCD_CALIB_E * raw_y + LCD_CALIB_F;
+
+    if (newX < 0 || newX > LCD_RENDER_WIDTH || newY < 0 ||
+        newY > LCD_RENDER_HEIGHT) {
         data->point.x = x;
         data->point.y = y;
         data->state = LV_INDEV_STATE_REL;
